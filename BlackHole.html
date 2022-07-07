@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: #0A0411;
+        
+    }
+
+    .wrapper {
+        height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .dot {
+        bottom: 0;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+
+    }
+
+    .blackHole {
+        position: relative;
+        z-index: 3;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: black;
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
+        cursor: pointer;
+        color: wheat;
+        border: 4px solid #D15C04;
+        border-top-color: #FCD659;
+        filter: blur(4px) drop-shadow(2px -7px 16px #D15C04);
+        border-top-width: 8px;
+       
+
+    }
+
+    
+</style>
+
+<body>
+    <div class="wrapper">
+        <div class="blackHole" onclick="Clear()"></div>
+    </div>
+
+    <script>
+        let button = document.getElementsByClassName('blackHole')[0]
+        buttonX = button.offsetLeft;
+        buttonY = button.offsetTop;
+        console.log(buttonX, buttonY)
+        let wrapper = document.getElementsByClassName('wrapper')[0]
+        for (let i = 0; i < 100; i++) {
+            wrapper.innerHTML += `<div class="dot"></div>`
+            let dot = document.querySelectorAll('.dot')[i]
+            dot.style.top = `${Math.random() * window.innerHeight}px`;
+            dot.style.left = `${Math.random() * window.innerWidth}px`;
+            dot.style.backgroundColor = `rgb(${Math.random() * 100},${Math.random() * 100},${Math.random() * 100})`;
+            dot.style.transition = `${Math.random() * 4}s all ease-in-out`
+        }
+        function Clear() {
+
+            let dots = document.querySelectorAll('.dot')
+            for (let i = 0; i < dots.length; i++) {
+                console.log(dots[i].offsetLeft, dots[i].offsetTop)
+                dots[i].style.transform = `translate(${(buttonX - dots[i].offsetLeft)}px,${(buttonY - dots[i].offsetTop)}px)`
+
+            }
+            
+        }
+
+    </script>
+</body>
+
+</html>
